@@ -164,12 +164,7 @@
             margin: 20px auto;
         }
 
-        .gif-container img {
-            width: 50%;
-            height: auto;
-            border-radius: 10px;
-        }
-
+        /* Modified Success Page Styles */
         #successPage {
             display: none;
             flex-direction: column;
@@ -177,11 +172,16 @@
             padding: 20px;
         }
 
+        #successPage .gif-container {
+            max-width: 100%;
+            width: 100%;
+        }
+
         #successGif {
             max-width: 800px;
             width: 90%;
             height: auto;
-            margin: 20px 0;
+            margin: 0 auto;
             display: block;
         }
 
@@ -204,8 +204,9 @@
                 font-size: 14px;
             }
 
-            .gif-container img {
-                max-width: 90%;
+            #successGif {
+                width: 95%;
+                max-width: 100%;
             }
 
             .volume-text {
@@ -231,10 +232,6 @@
                 width: 100px;
                 height: 40px;
                 font-size: 12px;
-            }
-
-            .gif-container img {
-                max-width: 80%;
             }
 
             .volume-text {
