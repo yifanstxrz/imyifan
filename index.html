@@ -23,6 +23,12 @@
         #welcomePage { z-index: 1000; }
         #questionPage { z-index: 999; display: none; }
 
+        /* New Welcome GIF Style */
+        .welcome-gif {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
         #welcomePage::before,
         #welcomePage::after,
         #questionPage::before,
@@ -65,13 +71,13 @@
             color: #ff69b4;
             text-align: center;
             padding: 20px;
-            margin-top: 10vh;
+            margin-top: 5vh;
             font-family: 'Arial', sans-serif;
         }
 
         .swipe-instruction {
             position: absolute;
-            bottom: 30%;
+            bottom: 45%;
             font-size: 1.2rem;
             color: #888;
             animation: float 2s infinite;
@@ -97,7 +103,7 @@
         .bobbing-image {
             animation: bob 2s ease-in-out infinite;
             max-width: 200px;
-            margin: 20px auto;
+            margin: 50px auto 20px;
             border-radius: 15px;
         }
 
@@ -193,9 +199,13 @@
         }
 
         @media (max-width: 480px) {
+            .welcome-gif {
+                max-width: 120px;
+            }
+            
             .welcome-text, h1 {
                 font-size: 1.5rem;
-                margin-top: 15vh;
+                margin-top: 3vh;
             }
 
             .buttons button {
@@ -215,6 +225,7 @@
 
             .bobbing-image {
                 max-width: 150px;
+                margin: 30px auto 15px;
             }
 
             #questionPage .swipe-instruction {
@@ -225,7 +236,7 @@
         @media (max-width: 320px) {
             .welcome-text, h1 {
                 font-size: 1.2rem;
-                margin-top: 20vh;
+                margin-top: 2vh;
             }
 
             .buttons button {
@@ -240,6 +251,7 @@
 
             .bobbing-image {
                 max-width: 120px;
+                margin: 20px auto 10px;
             }
 
             #questionPage .swipe-instruction {
@@ -255,14 +267,17 @@
 <body>
     <!-- First Welcome Page -->
     <div id="welcomePage">
+        <img src="https://media.tenor.com/mSIfEcNYz5QAAAAi/cute.gif" class="welcome-gif" alt="Cute Animation">
         <div class="welcome-text">hi kelly!!<br>welcome to my website!!! 😸😸😸</div>
         <div class="swipe-instruction">swipe left to open</div>
     </div>
 
     <!-- Second Question Page -->
     <div id="questionPage">
-        <img src="https://media.discordapp.net/attachments/1157772892147306539/1338981874113970257/IMG_4509.jpg?ex=67ad0f8b&is=67abbe0b&hm=492ff491e33d7adabe59193676fbb7c9af98b114918438e8a7652fe0e6f7ebdd&=&format=webp&width=868&height=1011" class="bobbing-image" alt="Special Image">
-        <div class="welcome-text">i have one question for you...</div>
+        <img src="https://media.discordapp.net/attachments/1157772892147306539/1338981874113970257/IMG_4509.jpg?ex=67ad0f8b&is=67abbe0b&hm=492ff491e33d7adabe59193676fbb7c9af98b114918438e8a7652fe0e6f7ebdd&=&format=webp&width=868&height=1011" 
+             class="bobbing-image" 
+             alt="Special Image">
+        <div class="welcome-text">i have one question for you..!</div>
         <div class="swipe-instruction">swipe left to continue</div>
     </div>
 
