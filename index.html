@@ -85,7 +85,6 @@
             margin: 20px 0;
         }
 
-        /* Mobile-Friendly Styles */
         @media (max-width: 480px) {
             h1 {
                 font-size: 22px;
@@ -126,7 +125,6 @@
             }
         }
 
-        /* Music player hidden */
         #bgMusic {
             display: none;
         }
@@ -153,19 +151,18 @@
         </div>
     </div>
 
-    <!-- Audio Player -->
+    <!-- Audio Element -->
     <audio id="bgMusic" loop>
         <source src="spotidownloader.com - intentions - starfall.mp3" type="audio/mpeg">
-        Your browser does not support audio
     </audio>
 
     <script>
-        // Original button logic
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
         const mainPage = document.getElementById('mainPage');
         const successPage = document.getElementById('successPage');
         const messages = ["No", "Are you sure?", "Really sure?", "Pleaseee", "Don't do this to me...", "NOO PLEASE", "IM GONNA DIE", "hi this is lucas's ghost", "please :(((((", "PRETTY PLEASE", "Noo :("];
+        const music = document.getElementById('bgMusic');
 
         let clickCount = 0;
         let yesScale = 1;
@@ -196,17 +193,9 @@
             successPage.style.display = 'flex';
             document.body.style.backgroundColor = '#ffe6f2';
             document.querySelector("h1").innerText = "YAYAYAYAY I LOVE YOU KELLY! 💖";
-        });
-
-        // Music logic
-        document.addEventListener('DOMContentLoaded', function() {
-            const music = document.getElementById('bgMusic');
             
-            document.body.addEventListener('click', function() {
-                music.play().catch(error => {
-                    console.log("Need user interaction first");
-                });
-            }, { once: true });
+            // Start playing music here
+            music.play();
         });
     </script>
 </body>
