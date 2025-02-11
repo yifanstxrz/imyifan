@@ -12,7 +12,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: white; /* White background for first screen */
+            background-color: white;
             font-family: 'Arial', sans-serif;
             text-align: center;
             overflow: hidden;
@@ -37,22 +37,22 @@
         }
 
         button {
-            width: 150px; /* Adjust width for smaller screens */
+            width: 150px;
             height: 50px;
             margin: 10px;
             border: none;
             font-size: 16px;
             cursor: pointer;
-            border-radius: 10px; /* Rounded corners */
+            border-radius: 10px;
         }
 
         #yesBtn {
-            background-color: #90ee90; /* Light green */
+            background-color: #90ee90;
             color: white;
         }
 
         #noBtn {
-            background-color: #ffcccb; /* Light red */
+            background-color: #ffcccb;
             color: white;
         }
 
@@ -66,7 +66,7 @@
         }
 
         .gif-container img {
-            width: 50%; /* Adjusted size for the first GIF */
+            width: 50%;
             height: auto;
             border-radius: 10px;
         }
@@ -79,9 +79,9 @@
         }
 
         #successGif {
-            max-width: 600px; /* Adjusted size for the second GIF */
-            width: 100%; /* Makes it responsive */
-            height: auto; /* Keeps the aspect ratio */
+            max-width: 600px;
+            width: 100%;
+            height: auto;
             margin: 20px 0;
         }
 
@@ -92,13 +92,13 @@
             }
 
             .buttons button {
-                width: 120px; /* Make buttons smaller on mobile */
+                width: 120px;
                 height: 45px;
                 font-size: 14px;
             }
 
             .gif-container img {
-                max-width: 90%; /* Adjust gif size for smaller screens */
+                max-width: 90%;
             }
 
             #yesBtn {
@@ -110,20 +110,25 @@
             }
         }
 
-        @media (max-width: 320px) { /* iPhone SE specific */
+        @media (max-width: 320px) {
             h1 {
-                font-size: 20px; /* Adjust title size for iPhone SE */
+                font-size: 20px;
             }
 
             .buttons button {
-                width: 100px; /* Even smaller buttons on iPhone SE */
+                width: 100px;
                 height: 40px;
                 font-size: 12px;
             }
 
             .gif-container img {
-                max-width: 80%; /* Keep gifs responsive on iPhone SE */
+                max-width: 80%;
             }
+        }
+
+        /* Music player hidden */
+        #bgMusic {
+            display: none;
         }
     </style>
 </head>
@@ -148,7 +153,14 @@
         </div>
     </div>
 
+    <!-- Audio Player -->
+    <audio id="bgMusic" loop>
+        <source src="spotidownloader.com - intentions - starfall.mp3" type="audio/mpeg">
+        Your browser does not support audio
+    </audio>
+
     <script>
+        // Original button logic
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
         const mainPage = document.getElementById('mainPage');
@@ -157,11 +169,10 @@
 
         let clickCount = 0;
         let yesScale = 1;
-        let noBtnOffset = 0; // To move the no button to the right on each click
-        let translateYAmount = 0; // Amount to move content up
+        let noBtnOffset = 0;
+        let translateYAmount = 0;
 
         noBtn.addEventListener('click', () => {
-            // Stop at the last message and keep it there
             if (clickCount < messages.length - 1) {
                 clickCount++;
             }
@@ -170,23 +181,32 @@
             yesScale += 0.2;
             yesBtn.style.transform = `scale(${yesScale})`;
             
-            // Move the No button a little to the right each time
             noBtn.style.transform = `translateX(${noBtnOffset}px)`;
-            noBtnOffset += 15; // Move by 30px each time
-            yesBtn.style.zIndex = '5'; // Ensure Yes button stays on top
+            noBtnOffset += 15;
+            yesBtn.style.zIndex = '5';
 
-            // If the Yes button grows too large, move the content up slightly
             if (yesScale >= 3) {
-                translateYAmount = (yesScale - 1) * 20; // Shift content up as the button grows
-                mainPage.style.transform = `translateY(-${translateYAmount}px)`; // Move the main content up
+                translateYAmount = (yesScale - 1) * 20;
+                mainPage.style.transform = `translateY(-${translateYAmount}px)`;
             }
         });
 
         yesBtn.addEventListener('click', () => {
             mainPage.classList.add('hidden');
             successPage.style.display = 'flex';
-            document.body.style.backgroundColor = '#ffe6f2'; // Keep the background color same after Yes
-            document.querySelector("h1").innerText = "YAYAYAYAY I LOVE YOU KELLY! 💖"; // Update text
+            document.body.style.backgroundColor = '#ffe6f2';
+            document.querySelector("h1").innerText = "YAYAYAYAY I LOVE YOU KELLY! 💖";
+        });
+
+        // Music logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const music = document.getElementById('bgMusic');
+            
+            document.body.addEventListener('click', function() {
+                music.play().catch(error => {
+                    console.log("Need user interaction first");
+                });
+            }, { once: true });
         });
     </script>
 </body>
