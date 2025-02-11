@@ -5,6 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>super secret surprise website!!</title>
     <style>
+        /* Welcome Page Styles */
+        #welcomePage, #questionPage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #welcomePage { z-index: 1000; }
+        #questionPage { z-index: 999; display: none; }
+
+        #welcomePage::before,
+        #welcomePage::after,
+        #questionPage::before,
+        #questionPage::after {
+            content: '';
+            position: absolute;
+            background: white;
+            width: 50%;
+            height: 100%;
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        #welcomePage::before,
+        #questionPage::before {
+            left: 0;
+            transform-origin: left center;
+        }
+
+        #welcomePage::after,
+        #questionPage::after {
+            right: 0;
+            transform-origin: right center;
+        }
+
+        .swiped {
+            transform: translateX(-100%) rotateY(-90deg) scale(0.8);
+        }
+
+        .swiped::before {
+            transform: rotateY(45deg) translateZ(-50px);
+        }
+
+        .swiped::after {
+            transform: rotateY(-45deg) translateZ(-50px);
+        }
+
+        .welcome-text {
+            font-size: 2rem;
+            color: #ff69b4;
+            text-align: center;
+            padding: 20px;
+            margin-top: 10vh;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .swipe-instruction {
+            position: absolute;
+            bottom: 30%;
+            font-size: 1.2rem;
+            color: #888;
+            animation: float 2s infinite;
+        }
+
+        #questionPage .swipe-instruction {
+            bottom: 20%;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Bobbing Image */
+        @keyframes bob {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        .bobbing-image {
+            animation: bob 2s ease-in-out infinite;
+            max-width: 200px;
+            margin: 20px auto;
+            border-radius: 15px;
+        }
+
+        /* Main Content Styles */
         body {
             margin: 0;
             padding: 0;
@@ -19,14 +116,16 @@
         }
 
         .container {
-            margin-top: 20px;
+            margin-top: 10vh;
             padding: 20px;
             transition: transform 0.3s ease;
         }
 
         h1 {
+            font-size: 2rem;
             color: #ff69b4;
             margin-bottom: 20px;
+            font-family: 'Arial', sans-serif;
         }
 
         .buttons {
@@ -85,7 +184,6 @@
             margin: 20px 0;
         }
 
-        /* Tiny text for volume reminder */
         .volume-text {
             font-size: 14px;
             color: #888;
@@ -94,8 +192,9 @@
         }
 
         @media (max-width: 480px) {
-            h1 {
-                font-size: 22px;
+            .welcome-text, h1 {
+                font-size: 1.5rem;
+                margin-top: 15vh;
             }
 
             .buttons button {
@@ -108,22 +207,23 @@
                 max-width: 90%;
             }
 
-            #yesBtn {
-                font-size: 16px;
-            }
-
-            #noBtn {
-                font-size: 16px;
-            }
-
             .volume-text {
                 font-size: 12px;
+            }
+
+            .bobbing-image {
+                max-width: 150px;
+            }
+
+            #questionPage .swipe-instruction {
+                bottom: 15%;
             }
         }
 
         @media (max-width: 320px) {
-            h1 {
-                font-size: 20px;
+            .welcome-text, h1 {
+                font-size: 1.2rem;
+                margin-top: 20vh;
             }
 
             .buttons button {
@@ -139,6 +239,14 @@
             .volume-text {
                 font-size: 11px;
             }
+
+            .bobbing-image {
+                max-width: 120px;
+            }
+
+            #questionPage .swipe-instruction {
+                bottom: 10%;
+            }
         }
 
         #bgMusic {
@@ -147,12 +255,26 @@
     </style>
 </head>
 <body>
-    <div class="main-content">
+    <!-- First Welcome Page -->
+    <div id="welcomePage">
+        <div class="welcome-text">hi kelly!!<br>welcome to my website!!! 😸😸😸</div>
+        <div class="swipe-instruction">swipe left to open</div>
+    </div>
+
+    <!-- Second Question Page -->
+    <div id="questionPage">
+        <img src="https://media.discordapp.net/attachments/1157772892147306539/1338981874113970257/IMG_4509.jpg?ex=67ad0f8b&is=67abbe0b&hm=492ff491e33d7adabe59193676fbb7c9af98b114918438e8a7652fe0e6f7ebdd&=&format=webp&width=868&height=1011" class="bobbing-image" alt="Special Image">
+        <div class="welcome-text">i have one question for you...</div>
+        <div class="swipe-instruction">swipe left to continue</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" style="opacity: 0; transition: opacity 1s;">
         <div class="container" id="mainPage">
             <div class="gif-container">
                 <img src="https://media.tenor.com/SwQT4BBJS0oAAAAj/peach-and-goma-peach-goma.gif" alt="Cute Bear">
             </div>
-            <h1>hi kelly!! will you be my valentine? 😸</h1>
+            <h1>will you be my valentine? 🌹</h1>
             <div class="buttons">
                 <button id="yesBtn">Yes!</button>
                 <button id="noBtn">No</button>
@@ -164,7 +286,6 @@
                 <img id="successGif" src="https://media.tenor.com/nXYPRjO69YYAAAAj/milk-and-mocha.gif" alt="Happy Bear">
             </div>
             <h1>YAYAYAYAY I LOVE YOU!! 💖</h1>
-            <!-- Tiny text for volume reminder -->
             <div class="volume-text">(volume up!)</div>
         </div>
     </div>
@@ -175,6 +296,52 @@
     </audio>
 
     <script>
+        // Swipe Detection
+        let touchStartX = 0;
+        let currentPage = 0;
+        const pages = [document.getElementById('welcomePage'), document.getElementById('questionPage')];
+        const mainContent = document.querySelector('.main-content');
+
+        // Touch events
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.touches[0].clientX;
+        });
+
+        document.addEventListener('touchend', e => {
+            const touchEndX = e.changedTouches[0].clientX;
+            handleSwipe(touchStartX, touchEndX);
+        });
+
+        // Mouse events for desktop
+        document.addEventListener('mousedown', e => {
+            touchStartX = e.clientX;
+            document.addEventListener('mouseup', onMouseUp);
+        });
+
+        function onMouseUp(e) {
+            const touchEndX = e.clientX;
+            handleSwipe(touchStartX, touchEndX);
+            document.removeEventListener('mouseup', onMouseUp);
+        }
+
+        function handleSwipe(startX, endX) {
+            if (startX - endX > 100) {
+                if (currentPage < pages.length) {
+                    pages[currentPage].classList.add('swiped');
+                    setTimeout(() => {
+                        pages[currentPage].style.display = 'none';
+                        currentPage++;
+                        if (currentPage < pages.length) {
+                            pages[currentPage].style.display = 'flex';
+                        } else {
+                            mainContent.style.opacity = '1';
+                        }
+                    }, 800);
+                }
+            }
+        }
+
+        // Original Button Logic
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
         const mainPage = document.getElementById('mainPage');
@@ -211,8 +378,6 @@
             successPage.style.display = 'flex';
             document.body.style.backgroundColor = '#ffe6f2';
             document.querySelector("h1").innerText = "YAYAYAYAY I LOVE YOU!! 💖";
-            
-            // Start playing music here
             music.play();
         });
     </script>
