@@ -26,7 +26,7 @@
 
         h1 {
             color: #ff69b4;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .buttons {
@@ -37,11 +37,11 @@
         }
 
         button {
-            width: 200px; /* Make the buttons rectangles */
-            height: 60px;
+            width: 150px; /* Adjust width for smaller screens */
+            height: 50px;
             margin: 10px;
             border: none;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             border-radius: 10px; /* Rounded corners */
         }
@@ -61,7 +61,7 @@
         }
 
         .gif-container {
-            max-width: 300px;
+            max-width: 80%;
             margin: 20px auto;
         }
 
@@ -81,6 +81,47 @@
         #successGif {
             max-width: 200px;
             margin: 20px 0;
+        }
+
+        /* Mobile-Friendly Styles */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 22px;
+            }
+
+            .buttons button {
+                width: 120px; /* Make buttons smaller on mobile */
+                height: 45px;
+                font-size: 14px;
+            }
+
+            .gif-container img {
+                max-width: 90%; /* Adjust gif size for smaller screens */
+            }
+
+            #yesBtn {
+                font-size: 16px;
+            }
+
+            #noBtn {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 320px) { /* iPhone SE specific */
+            h1 {
+                font-size: 20px; /* Adjust title size for iPhone SE */
+            }
+
+            .buttons button {
+                width: 100px; /* Even smaller buttons on iPhone SE */
+                height: 40px;
+                font-size: 12px;
+            }
+
+            .gif-container img {
+                max-width: 80%; /* Keep gifs responsive on iPhone SE */
+            }
         }
     </style>
 </head>
