@@ -118,7 +118,10 @@
         let translateYAmount = 0; // Amount to move content up
 
         noBtn.addEventListener('click', () => {
-            clickCount = (clickCount + 1) % messages.length;
+            // Stop at the last message and keep it there
+            if (clickCount < messages.length - 1) {
+                clickCount++;
+            }
             noBtn.textContent = messages[clickCount];
             
             yesScale += 0.2;
