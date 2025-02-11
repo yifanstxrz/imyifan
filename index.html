@@ -1,46 +1,99 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Be My Valentine?</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: pink;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-        }
-        h1 {
-            color: red;
-        }
-        .btn {
-            padding: 10px 20px;
-            font-size: 20px;
-            background-color: red;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .btn:hover {
-            background-color: darkred;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Will you be my Valentine? ❤️</h1>
-        <button class="btn" onclick="alert('Yay! Can’t wait to celebrate! 💕')">Yes!</button>
-    </div>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Will you be my valentine?</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background: url('https://gifdb.com/images/high/cute-love-bear-roses-ou7zho5oosxnpo6k.gif') no-repeat center center fixed;
+                background-size: cover;
+                text-align: center;
+                color: white;
+                font-family: Arial, sans-serif;
+            }
+            .container {
+                position: absolute;
+                text-align: center;
+                max-width: 80%;
+                z-index: 10;
+            }
+            #yes-btn, #no-btn {
+                font-size: 20px;
+                padding: 20px 40px;
+                margin: 10px;
+                cursor: pointer;
+                border: none;
+                border-radius: 5px;
+            }
+            #yes-btn {
+                background-color: #ff69b4;
+                transition: transform 0.3s ease;
+            }
+            #no-btn {
+                background-color: #ff6347;
+                transition: transform 0.3s ease;
+            }
+            #yes-btn:focus, #no-btn:focus {
+                outline: none;
+            }
+            .hidden {
+                display: none;
+            }
+            .gif-container {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 5;
+            }
+            .gif-container img {
+                width: 150px;
+                height: 150px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Will you be my Valentine?</h1>
+            <button id="yes-btn">Yes!</button>
+            <button id="no-btn">No!</button>
+        </div>
+        
+        <div class="gif-container hidden" id="gif-container">
+            <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Yes! gif">
+        </div>
+
+        <script>
+            const yesButton = document.getElementById('yes-btn');
+            const noButton = document.getElementById('no-btn');
+            const gifContainer = document.getElementById('gif-container');
+            let noButtonSize = 1;
+
+            yesButton.addEventListener('click', () => {
+                gifContainer.classList.remove('hidden'); // Show yes gif
+                document.body.style.backgroundImage = "url('https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif')";
+                yesButton.style.transform = 'scale(1.5)';
+                setTimeout(() => {
+                    alert('You said yes! <3');
+                }, 1000);
+            });
+
+            noButton.addEventListener('click', () => {
+                noButtonSize *= 0.9; // Reduce size of the no button
+                noButton.style.transform = `scale(${noButtonSize})`;
+                if (noButtonSize <= 0.1) {
+                    noButton.classList.add('hidden'); // Hide no button when it gets too small
+                }
+                yesButton.style.transform = 'scale(1.2)';
+            });
+        </script>
+    </body>
 </html>
