@@ -366,19 +366,23 @@
         const welcomePage = document.getElementById('welcomePage');
         const questionPage = document.getElementById('questionPage');
         const mainContent = document.querySelector('.main-content');
+        const transitionMusic = document.getElementById('transitionMusic');
 
         startButton.addEventListener('click', () => {
             startOverlay.style.display = 'none';
             welcomePage.classList.remove('blurred');
             questionPage.classList.remove('blurred');
             mainContent.classList.remove('blurred');
+            // Start playing The Marías track when the start button is pressed
+            transitionMusic.play().catch(error => {
+                console.log("Autoplay blocked. Please interact with the page to play music.");
+            });
         });
 
         // Swipe Detection
         let touchStartX = 0;
         let currentPage = 0;
         const pages = [welcomePage, questionPage];
-        const transitionMusic = document.getElementById('transitionMusic');
         const valentineMusic = document.getElementById('bgMusic');
 
         // Touch events
@@ -412,12 +416,6 @@
                         currentPage++;
                         if (currentPage < pages.length) {
                             pages[currentPage].style.display = 'flex';
-                            // Start playing The Marías track only after the first swipe
-                            if (currentPage === 1) {
-                                transitionMusic.play().catch(error => {
-                                    console.log("Autoplay blocked. Please interact with the page to play music.");
-                                });
-                            }
                         } else {
                             mainContent.style.opacity = '1';
                         }
