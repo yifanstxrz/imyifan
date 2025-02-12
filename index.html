@@ -92,7 +92,7 @@
         }
 
         #questionPage .swipe-instruction {
-            bottom: 31.8%;
+            bottom: 31.5%;
         }
 
         @keyframes float {
@@ -346,26 +346,29 @@
             document.removeEventListener('mouseup', onMouseUp);
         }
 
-        function handleSwipe(startX, endX) {
-            if (startX - endX > 100) {
+      function handleSwipe(startX, endX) {
+    if (startX - endX > 100) {
+        if (currentPage < pages.length) {
+            pages[currentPage].classList.add('swiped');
+            setTimeout(() => {
+                pages[currentPage].style.display = 'none';
+                currentPage++;
                 if (currentPage < pages.length) {
-                    pages[currentPage].classList.add('swiped');
-                    setTimeout(() => {
-                        pages[currentPage].style.display = 'none';
-                        currentPage++;
-                        if (currentPage < pages.length) {
-                            pages[currentPage].style.display = 'flex';
-                            // Start playing The Marías track on first swipe
-                            if (currentPage === 1) {
-                                transitionMusic.play();
-                            }
-                        } else {
-                            mainContent.style.opacity = '1';
-                        }
-                    }, 800);
+                    pages[currentPage].style.display = 'flex';
+                    // Start playing The Marías track only after user swipes
+                    if (currentPage === 1) {
+                        transitionMusic.play().catch(() => {
+                            console.log("Autoplay blocked, waiting for user action");
+                        });
+                    }
+                } else {
+                    mainContent.style.opacity = '1';
                 }
-            }
+            }, 800);
         }
+    }
+}
+
 
         // Original Button Logic
         const yesBtn = document.getElementById('yesBtn');
