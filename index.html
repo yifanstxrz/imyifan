@@ -265,11 +265,55 @@
         #bgMusic, #transitionMusic {
             display: none;
         }
+
+        /* Tap to Start Overlay */
+        #startOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            backdrop-filter: blur(10px);
+        }
+
+        #startOverlay h2 {
+            font-size: 1.5rem;
+            color: #ff69b4;
+            margin-bottom: 20px;
+        }
+
+        #startButton {
+            width: 100px;
+            height: 40px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .blurred {
+            filter: blur(10px);
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
+    <!-- Tap to Start Overlay -->
+    <div id="startOverlay">
+        <h2>Tap to Start!</h2>
+        <button id="startButton">Start!</button>
+    </div>
+
     <!-- First Welcome Page -->
-    <div id="welcomePage">
+    <div id="welcomePage" class="blurred">
         <img src="https://media.tenor.com/mSIfEcNYz5QAAAAi/cute.gif" class="welcome-gif" alt="Cute Animation">
         <div class="welcome-text">hi kelly!!<br>welcome to my website!!! 😸😸😸</div>
         <div class="volume-text">(volume up!)</div>
@@ -277,7 +321,7 @@
     </div>
 
     <!-- Second Question Page -->
-    <div id="questionPage">
+    <div id="questionPage" class="blurred">
         <img src="https://media.discordapp.net/attachments/1157772892147306539/1338981874113970257/IMG_4509.jpg?ex=67ad0f8b&is=67abbe0b&hm=492ff491e33d7adabe59193676fbb7c9af98b114918438e8a7652fe0e6f7ebdd&=&format=webp&width=868&height=1011" 
              class="bobbing-image" 
              alt="Special Image">
@@ -286,7 +330,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="main-content" style="opacity: 0; transition: opacity 1s;">
+    <div class="main-content blurred" style="opacity: 0; transition: opacity 1s;">
         <div class="container" id="mainPage">
             <div class="gif-container">
                 <img src="https://media.tenor.com/SwQT4BBJS0oAAAAj/peach-and-goma-peach-goma.gif" alt="Cute Bear">
@@ -316,11 +360,24 @@
     </audio>
 
     <script>
+        // Start Button Logic
+        const startOverlay = document.getElementById('startOverlay');
+        const startButton = document.getElementById('startButton');
+        const welcomePage = document.getElementById('welcomePage');
+        const questionPage = document.getElementById('questionPage');
+        const mainContent = document.querySelector('.main-content');
+
+        startButton.addEventListener('click', () => {
+            startOverlay.style.display = 'none';
+            welcomePage.classList.remove('blurred');
+            questionPage.classList.remove('blurred');
+            mainContent.classList.remove('blurred');
+        });
+
         // Swipe Detection
         let touchStartX = 0;
         let currentPage = 0;
-        const pages = [document.getElementById('welcomePage'), document.getElementById('questionPage')];
-        const mainContent = document.querySelector('.main-content');
+        const pages = [welcomePage, questionPage];
         const transitionMusic = document.getElementById('transitionMusic');
         const valentineMusic = document.getElementById('bgMusic');
 
